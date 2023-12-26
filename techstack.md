@@ -24,13 +24,15 @@ Full tech stack [here](/techstack.md)
 <div align="center">
 
 # Tech Stack File
-![](https://img.stackshare.io/repo.svg "repo") [TelebirrApp/TelebirrApp](https://github.com/TelebirrApp/TelebirrApp)![](https://img.stackshare.io/public_badge.svg "public")
-<br/><br/>
-|3<br/>Tools used|12/25/23 <br/>Report generated|
-|------|------|
+
+![](https://img.stackshare.io/repo.svg "repo")
+[TelebirrApp/TelebirrApp](https://github.com/TelebirrApp/TelebirrApp)![](https://img.stackshare.io/public_badge.svg "public")
+<br/><br/> |3<br/>Tools used|12/25/23 <br/>Report generated| |------|------|
+
 </div>
 
 ## <img src='https://img.stackshare.io/devops.svg'/> DevOps (3)
+
 <table><tr>
   <td align='center'>
   <img width='36' height='36' src='https://img.stackshare.io/service/10164/528389819366_e7a0672f0480b3e98d21_512.png' alt='Azure Pipelines'>
