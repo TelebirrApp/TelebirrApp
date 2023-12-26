@@ -3,7 +3,7 @@
 # Please see the documentation for all configuration options:
 # https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
 
-version: 1.0.0 
+version: 1.0.0
 updates:
   - package-ecosystem: "python" # See documentation for possible values
     directory: "/data/Storage/emulated/0/Android/cn.tydic.ethiopay" # Location of package manifests
