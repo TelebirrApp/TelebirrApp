@@ -1,7 +1,11 @@
 ---
 title: "{% data variables.product.prodname_actions %} documentation"
 shortTitle: "{% data variables.product.prodname_actions %}"
-intro: 'Automate, customize, and execute your software development workflows right in your repository with {% data variables.product.prodname_actions %}. You can discover, create, and share actions to perform any job you''d like, including CI/CD, and combine actions in a completely customized workflow.'
+intro:
+  "Automate, customize, and execute your software development workflows right in
+  your repository with {% data variables.product.prodname_actions %}. You can
+  discover, create, and share actions to perform any job you'd like, including
+  CI/CD, and combine actions in a completely customized workflow."
 introLinks:
   overview: /actions/learn-github-actions/understanding-github-actions
   quickstart: /actions/quickstart
@@ -38,10 +42,10 @@ redirect_from:
   - /actions/reference
 layout: product-landing
 versions:
-  fpt: '*'
-  ghes: '*'
-  ghae: '*'
-  ghec: '*'
+  fpt: "*"
+  ghes: "*"
+  ghae: "*"
+  ghec: "*"
 children:
   - /quickstart
   - /learn-github-actions
