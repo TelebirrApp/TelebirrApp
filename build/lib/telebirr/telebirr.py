@@ -7,9 +7,6 @@ import hashlib
 import re
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
-
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import load_der_public_key
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
