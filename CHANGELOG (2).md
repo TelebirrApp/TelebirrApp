@@ -3185,7 +3185,8 @@ info.
 
 - [#416](https://github.com/primer/primer/pull/416) Point style field to build
   file in subhead component. ([@muan](https://github.com/muan))
-- [#424](https://github.com/primer/primer/pull/424) Add missing $spacer-12 in
+- [#424](https://github.com/primer/primer/pull/424) Add missing
+  $spacer-12 in
   $marketingSpacers variable.
   ([@gladwearefriends](https://github.com/gladwearefriends))
 
