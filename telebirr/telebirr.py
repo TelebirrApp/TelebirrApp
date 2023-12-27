@@ -1,9 +1,7 @@
-import datetime, json, requests, base64, hashlib, re, time, uuid
+import datetime, json, requests, base64, re, time, uuid
 from Crypto.PublicKey import RSA
 from Crypto.Cipher import PKCS1_v1_5
 
-from cryptography.hazmat.primitives import hashes
-from cryptography.hazmat.primitives.asymmetric.rsa import RSAPublicKey
 from cryptography.hazmat.backends import default_backend
 from cryptography.hazmat.primitives.serialization import load_der_public_key
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
@@ -14,10 +12,22 @@ from . import utils
 class Telebirr:
     api = "http://196.188.120.3:10443/service-openup/toTradeWebPay"
 
-    def __init__(self, app_id, app_key, public_key, notify_url, receive_name, return_url, short_code, subject,
-                 timeout_express, total_amount, nonce, out_trade_no,
-                 api="http://196.188.120.3:10443/service-openup/toTradeWebPay"):
-
+    def __init__(
+        self,
+        app_id,
+        app_key,
+        public_key,
+        notify_url,
+        receive_name,
+        return_url,
+        short_code,
+        subject,
+        timeout_express,
+        total_amount,
+        nonce,
+        out_trade_no,
+        api="http://196.188.120.3:10443/service-openup/toTradeWebPay",
+    ):
         self.api = api
         self.app_id = app_id
         ussd = {
@@ -29,16 +39,23 @@ class Telebirr:
             "shortCode": short_code,
             "subject": subject,
             "timeoutExpress": timeout_express,
-            "totalAmount": total_amount, "nonce": nonce,
-            "timestamp": str(int(datetime.datetime.now().timestamp() * 1000))
+            "totalAmount": total_amount,
+            "nonce": nonce,
+            "timestamp": str(int(datetime.datetime.now().timestamp() * 1000)),
         }
         self.ussd = self.__encrypt_ussd(ussd=ussd, public_key=public_key)
         self.sign = self.__sign(ussd=ussd, app_key=app_key)
 
     @staticmethod
     def __encrypt_ussd(ussd, public_key):
-        public_key = re.sub("(.{64})", "\\1\n", public_key.replace("\n", ""), 0, re.DOTALL)
-        public_key = '-----BEGIN CERTIFICATE-----\n{}\n-----END CERTIFICATE-----'.format(public_key)
+        public_key = re.sub(
+            "(.{64})", "\\1\n", public_key.replace("\n", ""), 0, re.DOTALL
+        )
+        public_key = (
+            "-----BEGIN CERTIFICATE-----\n{}\n-----END CERTIFICATE-----".format(
+                public_key
+            )
+        )
         ussd_json = json.dumps(ussd)
         encrypt = Telebirr.encrypt(public_key=public_key, msg=ussd_json)
         return encrypt
@@ -47,11 +64,13 @@ class Telebirr:
     def encrypt(public_key, msg):
         rsa = RSA.importKey(public_key)
         cipher = PKCS1_v1_5.new(rsa)
-        ciphertext = b''
+        ciphertext = b""
         for i in range(0, len(msg) // 117):
-            ciphertext += cipher.encrypt(msg[i * 117:(i + 1) * 117].encode('utf8'))
-        ciphertext += cipher.encrypt(msg[(len(msg) // 117) * 117: len(msg)].encode('utf8'))
-        return base64.b64encode(ciphertext).decode('ascii')
+            ciphertext += cipher.encrypt(msg[i * 117 : (i + 1) * 117].encode("utf8"))
+        ciphertext += cipher.encrypt(
+            msg[(len(msg) // 117) * 117 : len(msg)].encode("utf8")
+        )
+        return base64.b64encode(ciphertext).decode("ascii")
 
     @staticmethod
     def __sign(ussd, app_key):
@@ -61,11 +80,7 @@ class Telebirr:
         return str(string_b).upper()
 
     def request_params(self):
-        return {
-            "appid": self.app_id,
-            "sign": self.sign,
-            "ussd": self.ussd
-        }
+        return {"appid": self.app_id, "sign": self.sign, "ussd": self.ussd}
 
     def send_request(self):
         response = requests.post(url=self.api, json=self.request_params())
@@ -73,16 +88,25 @@ class Telebirr:
 
     @staticmethod
     def decrypt(public_key, payload):
-        public_key = re.sub("(.{64})", "\\1\n", public_key.replace("\n", ""), 0, re.DOTALL)
-        public_key = '-----BEGIN PUBLIC KEY-----\n{}\n-----END PUBLIC KEY-----\n'.format(public_key)
-        b64data = '\n'.join(public_key.splitlines()[1:-1])
+        public_key = re.sub(
+            "(.{64})", "\\1\n", public_key.replace("\n", ""), 0, re.DOTALL
+        )
+        public_key = (
+            "-----BEGIN PUBLIC KEY-----\n{}\n-----END PUBLIC KEY-----\n".format(
+                public_key
+            )
+        )
+        b64data = "\n".join(public_key.splitlines()[1:-1])
         key = load_der_public_key(base64.b64decode(b64data), default_backend())
 
         signature = base64.b64decode(payload)
-        decrypted = b''
+        decrypted = b""
         for i in range(0, len(signature), 256):
             partial = key.recover_data_from_signature(
-                signature[i:i + 256 if i + 256 < len(signature) else len(signature)], PKCS1v15(), None)
+                signature[i : i + 256 if i + 256 < len(signature) else len(signature)],
+                PKCS1v15(),
+                None,
+            )
             decrypted += partial
 
         return json.loads(decrypted)
@@ -98,8 +122,12 @@ class TelebirrSuperApp:
         self.url = url
 
     def apply_fabric_token(self):
-        response = requests.post(url=self.url + "/apiaccess/payment/gateway/payment/v1/token",
-                                 headers={"X-App-key": self.app_key}, json={"appSecret": self.app_secret}, verify=False)
+        response = requests.post(
+            url=self.url + "/apiaccess/payment/gateway/payment/v1/token",
+            headers={"X-App-key": self.app_key},
+            json={"appSecret": self.app_secret},
+            verify=False,
+        )
         return json.loads(response.content)
 
     def auth(self, token):
@@ -120,21 +148,31 @@ class TelebirrSuperApp:
             "sign_type": "SHA256WithRSA",
         }
         signature = utils.sign(payload, self.private_key)
-        payload['sign'] = signature
+        payload["sign"] = signature
 
         response = requests.post(
             url=url,
             headers={
                 "X-App-key": self.app_key,
-                "Authorization": fabric_token.get("token")
+                "Authorization": fabric_token.get("token"),
             },
             json=payload,
-            verify=False
+            verify=False,
         )
         return json.loads(response.content)
 
-    def request_create_order(self, nonce_str, amount, notify_url, redirect_url, merch_order_id, timeout_express, title,
-                             business_type, payee_identifier_type):
+    def request_create_order(
+        self,
+        nonce_str,
+        amount,
+        notify_url,
+        redirect_url,
+        merch_order_id,
+        timeout_express,
+        title,
+        business_type,
+        payee_identifier_type,
+    ):
         fabric_token = self.apply_fabric_token()
         url = self.url + "/apiaccess/payment/gateway/payment/v1/merchant/preOrder"
         SIGN_TYPE = "SHA256WithRSA"
@@ -155,40 +193,46 @@ class TelebirrSuperApp:
                 "business_type": business_type,
                 "payee_identifier": self.short_code,
                 "payee_identifier_type": payee_identifier_type,
-                "payee_type": "5000"
+                "payee_type": "5000",
             },
             "method": "payment.preorder",
             "version": "1.0",
             "sign_type": SIGN_TYPE,
-            "timestamp": timestamp
+            "timestamp": timestamp,
         }
         signature = utils.sign(payload, self.private_key)
-        payload['sign'] = signature
+        payload["sign"] = signature
         print(payload)
         response = requests.post(
             url=url,
             headers={
                 "X-App-key": self.app_key,
-                "Authorization": fabric_token.get("token")
+                "Authorization": fabric_token.get("token"),
             },
             json=payload,
-            verify=False
+            verify=False,
         )
         response = json.loads(response.content)
         payload = {
             "appid": self.merchant_id,
             "merch_code": self.short_code,
             "nonce_str": nonce_str,
-            "prepay_id": response.get('biz_content').get('prepay_id'),
+            "prepay_id": response.get("biz_content").get("prepay_id"),
             "timestamp": timestamp,
-            "sign_type": SIGN_TYPE
+            "sign_type": SIGN_TYPE,
         }
         pay_signature = utils.sign(payload, self.private_key)
         payload["sign"] = pay_signature
         return response, payload
 
-    def queryOrder(self, nonce_str, merch_order_id, version="1.0", method="payment.queryorder",
-                   sign_type="SHA256WithRSA"):
+    def queryOrder(
+        self,
+        nonce_str,
+        merch_order_id,
+        version="1.0",
+        method="payment.queryorder",
+        sign_type="SHA256WithRSA",
+    ):
         fabric_token = self.apply_fabric_token()
 
         url = self.url + "/apiaccess/payment/gateway/payment/v1/merchant/queryOrder"
@@ -201,8 +245,8 @@ class TelebirrSuperApp:
             "biz_content": {
                 "appid": self.merchant_id,
                 "merch_code": self.short_code,
-                "merch_order_id": merch_order_id
-            }
+                "merch_order_id": merch_order_id,
+            },
         }
         print(payload)
         print(url)
@@ -213,10 +257,10 @@ class TelebirrSuperApp:
             url=url,
             headers={
                 "X-App-key": self.app_key,
-                "Authorization": fabric_token.get("token")
+                "Authorization": fabric_token.get("token"),
             },
             json=payload,
-            verify=False
+            verify=False,
         )
         print(response.text)
         return json.loads(response.content)
@@ -230,7 +274,8 @@ class TelebirrSuperApp:
             "refund_info",
             "openType",
             "raw_request",
-            "biz_cont"]
+            "biz_cont",
+        ]
         to_sign_data = data.copy()
         flat_signa_data = {}
         for key, value in to_sign_data.items():
