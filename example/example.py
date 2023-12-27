@@ -1,5 +1,6 @@
 from telebirr import TelebirrSuperApp
-import random, uuid
+import random
+import uuid
 
 
 def main():
