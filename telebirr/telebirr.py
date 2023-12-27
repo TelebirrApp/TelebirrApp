@@ -270,27 +270,3 @@ class TelebirrSuperApp:
         )
         print(response.text)
         return json.loads(response.content)
-
-    @staticmethod
-    def __sign(data, private_key):
-        excludeFields = [
-            "sign",
-            "sign_type",
-            "header",
-            "refund_info",
-            "openType",
-            "raw_request",
-            "biz_cont",
-        ]
-        to_sign_data = data.copy()
-        flat_signa_data = {}
-        for key, value in to_sign_data.items():
-            if isinstance(value, dict):
-                for k, v in value.items():
-                    if k not in excludeFields:
-                        flat_signa_data[k] = v
-            else:
-                if key not in excludeFields:
-                    flat_signa_data[key] = value
-        string_b = utils.sign_sha256(flat_signa_data, private_key)
-        return string_b
