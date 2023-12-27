@@ -60,8 +60,7 @@ def SignWithRSA(data, key, sign_type="SHA256withRSA"):
         signer = pss.new(key)
         signature = signer.sign(digest)
         return b64encode(signature).decode("utf-8")
-    else:
-        return "Only allowed to the type SHA256withRSA hash"
+    return "Only allowed to the type SHA256withRSA hash"
 
 
 #  * @Purpose: Creating a new merchantOrderId
