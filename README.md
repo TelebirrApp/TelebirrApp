@@ -1,4 +1,4 @@
-![Auto Assign](https://www.ethiotelecom.et/telebirr 
+![Auto Assign](https://www.ethiotelecom.et/telebirr
 App/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
 
 ![Proof HTML](https://www.ethiotelecom.et/telebirr
