@@ -11,9 +11,11 @@ jobs:
           POSTGRES_PASSWORD: postgres
           POSTGRES_DB: pythonorg
         ports:
-        - 5432:5432
+          - 5432:5432
         # needed because the postgres container does not provide a healthcheck
-        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+        options:
+          --health-cmd pg_isready --health-interval 10s --health-timeout 5s
+          --health-retries 5
     steps:
       - name: Check out repository
         uses: actions/checkout@v2
@@ -26,7 +28,9 @@ jobs:
           cache-name: pythondotorg-cache-pip
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-${{ hashFiles('requirements.txt', '*-requirements.txt') }}
+          key:
+            ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-${{
+            hashFiles('requirements.txt', '*-requirements.txt') }}
           restore-keys: |
             ${{ runner.os }}-${{ github.job }}-${{ env.cache-name }}-
             ${{ runner.os }}-${{ github.job }}-
