@@ -1,7 +1,7 @@
-![Auto Assign](https://github.com/Telebirr
+![Auto Assign](https://www.ethiotelecom.et/telebirr 
 App/demo-repository/actions/workflows/auto-assign.yml/badge.svg)
 
-![Proof HTML](https://github.com/Telebirr
+![Proof HTML](https://www.ethiotelecom.et/telebirr
 App/demo-repository/actions/workflows/proof-html.yml/badge.svg)
 
 # Welcome to your organization's demo respository
