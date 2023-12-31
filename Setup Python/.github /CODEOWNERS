@@ -1,1 +1,3 @@
-* @actions/setup-actions-team
+**/* @github/codeql-action-reviewers
+
+/python-setup/ @github/codeql-python @github/codeql-action-reviewers
