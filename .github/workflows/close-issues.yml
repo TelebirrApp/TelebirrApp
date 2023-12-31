@@ -1,4 +1,4 @@
-name: 'Autoclose Issues'
+name: "Autoclose Issues"
 
 on:
   issues:
