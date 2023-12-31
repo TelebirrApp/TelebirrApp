@@ -12,7 +12,6 @@ What happened instead.
 
 ```python
 import requests
-
 ```
 
 ## System Information
