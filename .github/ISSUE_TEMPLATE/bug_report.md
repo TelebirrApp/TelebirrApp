@@ -1,44 +1,71 @@
 ---
+
 name: Bug report
-about: Report a bug with Python.org website to help us improve
+
+about: Create a report to help us improve
+
+
+
 ---
 
-<!--
-This is the repository and issue tracker for https://www.python.org
-website.
 
-If you're looking to file an issue with CPython itself, please go to
-https://github.com/python/cpython/issues/new/choose
 
-Issues related to Python's documentation (https://docs.python.org) can
-also be filed at https://github.com/python/cpython/issues/new?assignees=&labels=docs&template=documentation.md.
--->
+<!-- Summary. -->
 
-**Describe the bug** A clear and concise description of what the bug is.
 
-**To Reproduce** Steps to reproduce the behavior:
 
-1. Go to '...'
-2. Click on '....'
-3. Scroll down to '....'
-4. See error
+## Expected Result
 
-**Expected behavior** A clear and concise description of what you expected to
-happen.
 
-**Screenshots** If applicable, add screenshots to help explain your problem.
 
-**Desktop (please complete the following information):**
+<!-- What you expected. -->
 
-- OS: [e.g. iOS]
-- Browser [e.g. chrome, safari]
-- Version [e.g. 22]
 
-**Smartphone (please complete the following information):**
 
-- Device: [e.g. iPhone6]
-- OS: [e.g. iOS8.1]
-- Browser [e.g. stock browser, safari]
-- Version [e.g. 22]
+## Actual Result
 
-**Additional context** Add any other context about the problem here.
+
+
+<!-- What happened instead. -->
+
+
+
+## Reproduction Steps
+
+
+
+```python
+
+import requests
+
+
+
+```
+
+
+
+## System Information
+
+
+
+    $ python -m requests.help
+
+
+
+```json
+
+{
+
+  "paste": "here"
+
+}
+
+```
+
+
+
+<!-- This command is only available on Requests v2.16.4 and greater. Otherwise,
+
+please provide some basic information about your system (Python version,
+
+operating system, &c). -->
