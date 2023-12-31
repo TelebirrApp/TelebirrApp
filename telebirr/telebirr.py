@@ -1,16 +1,16 @@
+import base64
 import datetime
 import json
-import requests
-import base64
 import re
 import time
 import uuid
-from Crypto.PublicKey import RSA
-from Crypto.Cipher import PKCS1_v1_5
 
+import requests
+from Crypto.Cipher import PKCS1_v1_5
+from Crypto.PublicKey import RSA
 from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives.serialization import load_der_public_key
 from cryptography.hazmat.primitives.asymmetric.padding import PKCS1v15
+from cryptography.hazmat.primitives.serialization import load_der_public_key
 
 from . import utils
 
@@ -141,7 +141,7 @@ class TelebirrSuperApp:
         url = self.url + "/apiaccess/payment/gateway/payment/v1/auth/authToken"
 
         payload = {
-            "timestamp": "{}".format(int(time.time())),
+            "timestamp": f"{int(time.time())}",
             "method": "payment.authtoken",
             "nonce_str": str(uuid.uuid4().hex),
             "biz_content": {
@@ -182,7 +182,7 @@ class TelebirrSuperApp:
         fabric_token = self.apply_fabric_token()
         url = self.url + "/apiaccess/payment/gateway/payment/v1/merchant/preOrder"
         SIGN_TYPE = "SHA256WithRSA"
-        timestamp = "{}".format(int(time.time()))
+        timestamp = f"{int(time.time())}"
         payload = {
             "nonce_str": nonce_str,
             "biz_content": {
@@ -243,7 +243,7 @@ class TelebirrSuperApp:
 
         url = self.url + "/apiaccess/payment/gateway/payment/v1/merchant/queryOrder"
         payload = {
-            "timestamp": "{}".format(int(time.time())),
+            "timestamp": f"{int(time.time())}",
             "nonce_str": nonce_str,
             "method": "payment.queryorder",
             "sign_type": sign_type,
