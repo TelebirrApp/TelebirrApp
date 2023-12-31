@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
-import ruamel.yaml
-from ruamel.yaml.scalarstring import FoldedScalarString
 import pathlib
 import textwrap
+
+import ruamel.yaml
+from ruamel.yaml.scalarstring import FoldedScalarString
 
 # The default set of CodeQL Bundle versions to use for the PR checks.
 defaultTestVersions = [
@@ -24,7 +25,7 @@ defaultTestVersions = [
     # the default version on Dotcom.
     "latest",
     # A nightly build directly from the our private repo, built in the last 24 hours.
-    "nightly-latest"
+    "nightly-latest",
 ]
 
 # When updating the ruamel.yaml version here, update the PR check in
@@ -52,124 +53,127 @@ yaml.Representer = NonAliasingRTRepresenter
 this_dir = pathlib.Path(__file__).resolve().parent
 
 allJobs = {}
-for file in (this_dir / 'checks').glob('*.yml'):
-    with open(file, 'r') as checkStream:
+for file in (this_dir / "checks").glob("*.yml"):
+    with open(file) as checkStream:
         checkSpecification = yaml.load(checkStream)
 
     matrix = []
-    for version in checkSpecification.get('versions', defaultTestVersions):
+    for version in checkSpecification.get("versions", defaultTestVersions):
         runnerImages = ["ubuntu-latest", "macos-latest", "windows-latest"]
-        if checkSpecification.get('operatingSystems', None):
-            runnerImages = [image for image in runnerImages for operatingSystem in checkSpecification['operatingSystems']
-                            if image.startswith(operatingSystem)]
+        if checkSpecification.get("operatingSystems", None):
+            runnerImages = [
+                image
+                for image in runnerImages
+                for operatingSystem in checkSpecification["operatingSystems"]
+                if image.startswith(operatingSystem)
+            ]
 
         for runnerImage in runnerImages:
-            matrix.append({
-                'os': runnerImage,
-                'version': version
-            })
+            matrix.append({"os": runnerImage, "version": version})
 
-        useAllPlatformBundle = "false" # Default to false
-        if checkSpecification.get('useAllPlatformBundle'):
-            useAllPlatformBundle = checkSpecification['useAllPlatformBundle']
+        useAllPlatformBundle = "false"  # Default to false
+        if checkSpecification.get("useAllPlatformBundle"):
+            useAllPlatformBundle = checkSpecification["useAllPlatformBundle"]
 
     steps = [
         {
-            'name': 'Setup Python on MacOS',
-            'uses': 'actions/setup-python@v5',
+            "name": "Setup Python on MacOS",
+            "uses": "actions/setup-python@v5",
             # Ensure that this is serialized as a folded (`>`) string to preserve the readability
             # of the generated workflow.
-            'if': FoldedScalarString(textwrap.dedent('''
+            "if": FoldedScalarString(
+                textwrap.dedent(
+                    """
                     matrix.os == 'macos-latest' && (
                     matrix.version == 'stable-20220908' ||
                     matrix.version == 'stable-20221211' ||
                     matrix.version == 'stable-20230418' ||
                     matrix.version == 'stable-v2.13.5' ||
                     matrix.version == 'stable-v2.14.6')
-            ''').strip()),
-            'with': {
-                'python-version': '3.11'
-            }
+            """
+                ).strip()
+            ),
+            "with": {"python-version": "3.11"},
         },
+        {"name": "Check out repository", "uses": "actions/checkout@v4"},
         {
-            'name': 'Check out repository',
-            'uses': 'actions/checkout@v4'
-        },
-        {
-            'name': 'Prepare test',
-            'id': 'prepare-test',
-            'uses': './.github/actions/prepare-test',
-            'with': {
-                'version': '${{ matrix.version }}',
-                'use-all-platform-bundle': useAllPlatformBundle
-            }
+            "name": "Prepare test",
+            "id": "prepare-test",
+            "uses": "./.github/actions/prepare-test",
+            "with": {
+                "version": "${{ matrix.version }}",
+                "use-all-platform-bundle": useAllPlatformBundle,
+            },
         },
         # We don't support Swift on Windows or prior versions of the CLI.
         {
-            'name': 'Set environment variable for Swift enablement',
+            "name": "Set environment variable for Swift enablement",
             # Ensure that this is serialized as a folded (`>`) string to preserve the readability
             # of the generated workflow.
-            'if': FoldedScalarString(textwrap.dedent('''
+            "if": FoldedScalarString(
+                textwrap.dedent(
+                    """
                 runner.os != 'Windows' && (
                     matrix.version == '20220908' ||
                     matrix.version == '20221211'
                 )
-            ''').strip()),
-            'shell': 'bash',
-            'run': 'echo "CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT=true" >> $GITHUB_ENV'
+            """
+                ).strip()
+            ),
+            "shell": "bash",
+            "run": 'echo "CODEQL_ENABLE_EXPERIMENTAL_FEATURES_SWIFT=true" >> $GITHUB_ENV',
         },
     ]
 
-    steps.extend(checkSpecification['steps'])
+    steps.extend(checkSpecification["steps"])
 
     checkJob = {
-        'strategy': {
-            'matrix': {
-                'include': matrix
-            }
-        },
-        'name': checkSpecification['name'],
-        'permissions': {
-            'contents': 'read',
-            'security-events': 'write'
-        },
-        'timeout-minutes': 45,
-        'runs-on': '${{ matrix.os }}',
-        'steps': steps,
+        "strategy": {"matrix": {"include": matrix}},
+        "name": checkSpecification["name"],
+        "permissions": {"contents": "read", "security-events": "write"},
+        "timeout-minutes": 45,
+        "runs-on": "${{ matrix.os }}",
+        "steps": steps,
     }
-    if 'permissions' in checkSpecification:
-        checkJob['permissions'] = checkSpecification['permissions']
+    if "permissions" in checkSpecification:
+        checkJob["permissions"] = checkSpecification["permissions"]
 
     for key in ["env", "container", "services"]:
         if key in checkSpecification:
             checkJob[key] = checkSpecification[key]
 
-    checkJob['env'] = checkJob.get('env', {})
-    if 'CODEQL_ACTION_TEST_MODE' not in checkJob['env']:
-        checkJob['env']['CODEQL_ACTION_TEST_MODE'] = True
+    checkJob["env"] = checkJob.get("env", {})
+    if "CODEQL_ACTION_TEST_MODE" not in checkJob["env"]:
+        checkJob["env"]["CODEQL_ACTION_TEST_MODE"] = True
     checkName = file.stem
 
-    with open(this_dir.parent / ".github" / "workflows" / f"__{checkName}.yml", 'w') as output_stream:
+    with open(
+        this_dir.parent / ".github" / "workflows" / f"__{checkName}.yml", "w"
+    ) as output_stream:
         writeHeader(output_stream)
-        yaml.dump({
-            'name': f"PR Check - {checkSpecification['name']}",
-            'env': {
-                'GITHUB_TOKEN': '${{ secrets.GITHUB_TOKEN }}',
-                'GO111MODULE': 'auto',
-                # Disable Kotlin analysis while it's incompatible with Kotlin 1.8, until we find a
-                # workaround for our PR checks.
-                'CODEQL_EXTRACTOR_JAVA_AGENT_DISABLE_KOTLIN': 'true',
-            },
-            'on': {
-                'push': {
-                    'branches': ['main', 'releases/v*']
+        yaml.dump(
+            {
+                "name": f"PR Check - {checkSpecification['name']}",
+                "env": {
+                    "GITHUB_TOKEN": "${{ secrets.GITHUB_TOKEN }}",
+                    "GO111MODULE": "auto",
+                    # Disable Kotlin analysis while it's incompatible with Kotlin 1.8, until we find a
+                    # workaround for our PR checks.
+                    "CODEQL_EXTRACTOR_JAVA_AGENT_DISABLE_KOTLIN": "true",
                 },
-                'pull_request': {
-                    'types': ["opened", "synchronize", "reopened", "ready_for_review"]
+                "on": {
+                    "push": {"branches": ["main", "releases/v*"]},
+                    "pull_request": {
+                        "types": [
+                            "opened",
+                            "synchronize",
+                            "reopened",
+                            "ready_for_review",
+                        ]
+                    },
+                    "workflow_dispatch": {},
                 },
-                'workflow_dispatch': {}
+                "jobs": {checkName: checkJob},
             },
-            'jobs': {
-                checkName: checkJob
-            }
-        }, output_stream)
+            output_stream,
+        )
