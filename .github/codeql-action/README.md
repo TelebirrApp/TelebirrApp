@@ -11,7 +11,7 @@ Announcement for users of this Action and code scanning workflows on GitHub.com:
 - All code scanning workflows should continue to succeed regardless of the warning.
 - The team at GitHub maintaining the CodeQL Action is aware of the deprecation timeline and actively working on creating another version of the CodeQL Action, v3, that will bump us to Node 20.
 
-For more information, and to communicate with the maintaining team, please use [this issue](https://github.com/github/codeql-action/issues/1959). 
+For more information, and to communicate with the maintaining team, please use [this issue](https://github.com/github/codeql-action/issues/1959).
 
 ## License
 
