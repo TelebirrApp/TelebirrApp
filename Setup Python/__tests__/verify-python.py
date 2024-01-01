@@ -15,7 +15,7 @@ if argCount == 1:
         majorMinorMicro = majorMinor + '.' + str(sys.version_info[2])
         if expectedVersion != majorMinorMicro:
             raise Exception("Incorrect major + minor + micro version detected\nExpected: " + expectedVersion + "\nActual: " + majorMinorMicro)
-    else: 
+    else:
         raise Exception("Incorrect number of arguments supplied")
     print("Correct version of Python " + expectedVersion + " detected")
 else:
