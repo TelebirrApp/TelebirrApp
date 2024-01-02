@@ -1,54 +1,24 @@
-# Contribution Guidelines
+## Contributing
 
-Before opening any issues or proposing any pull requests, please read our
-[Contributor's Guide](https://requests.readthedocs.io/en/latest/dev/contributing/).
+[code-of-conduct]: CODE_OF_CONDUCT.md
 
-To get the greatest chance of helpful responses, please also observe the
-following additional notes.
+Hi there 👋 We are excited that you want to contribute a new workflow to this repo. By doing this you are helping people get up and running with GitHub Actions and that's cool 😎.
 
-## Questions
+Contributions to this project are [released](https://help.github.com/articles/github-terms-of-service/#6-contributions-under-repository-license) to the public under the [project's open source license](https://github.com/actions/starter-workflows/blob/main/LICENSE).
 
-The GitHub issue tracker is for _bug reports_ and _feature requests_. Please do
-not use it to ask questions about how to use Requests. These questions should
-instead be directed to [Stack Overflow](https://stackoverflow.com/). Make sure
-that your question is tagged with the `python-requests` tag when asking it on
-Stack Overflow, to ensure that it is answered promptly and accurately.
+Please note that this project is released with a [Contributor Code of Conduct](
+https://github.com/actions/.github/blob/main/CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.
 
-## Good Bug Reports
+**At this time we are only accepting new starter workflows for Code Scanning**
 
-Please be aware of the following things when filing bug reports:
+### Previous guidelines for new starter workflows.
 
-1. Avoid raising duplicate issues. _Please_ use the GitHub issue search feature
-   to check whether your bug report or feature request has been mentioned in the
-   past. Duplicate bug reports and feature requests are a huge maintenance
-   burden on the limited resources of the project. If it is clear from your
-   report that you would have struggled to find the original, that's ok, but if
-   searching for a selection of words in your issue title would have found the
-   duplicate then the issue will likely be closed extremely abruptly.
-2. When filing bug reports about exceptions or tracebacks, please include the
-   _complete_ traceback. Partial tracebacks, or just the exception text, are not
-   helpful. Issues that do not contain complete tracebacks may be closed without
-   warning.
-3. Make sure you provide a suitable amount of information to work with. This
-   means you should provide:
+Before merging a new workflow, the following requirements need to be met:
 
-   - Guidance on **how to reproduce the issue**. Ideally, this should be a
-     _small_ code sample that can be run immediately by the maintainers. Failing
-     that, let us know what you're doing, how often it happens, what environment
-     you're using, etc. Be thorough: it prevents us needing to ask further
-     questions.
-   - Tell us **what you expected to happen**. When we run your example code,
-     what are we expecting to happen? What does "success" look like for your
-     code?
-   - Tell us **what actually happens**. It's not helpful for you to say "it
-     doesn't work" or "it fails". Tell us _how_ it fails: do you get an
-     exception? A hang? A non-200 status code? How was the actual result
-     different from your expected result?
-   - Tell us **what version of Requests you're using**, and **how you installed
-     it**. Different versions of Requests behave differently and have different
-     bugs, and some distributors of Requests ship patches on top of the code we
-     supply.
+- Should be as simple as is needed for the service.
+- There are many programming languages and tools out there. Right now we don't have a page that allows for a really large number of workflows, so we do have to be a little choosy about what we accept. Less popular tools or languages might not be accepted.
+- Automation and CI workflows should not send data to any 3rd party service except for the purposes of installing dependencies.
+- Automation and CI workflows cannot be dependent on a paid service or product.
+- We require that Actions outside of the `actions` organization be pinned to a specific SHA.
 
-   If you do not provide all of these things, it will take us much longer to fix
-   your problem. If we ask you to clarify these and you never respond, we will
-   close your issue without fixing it.
+Thank you
