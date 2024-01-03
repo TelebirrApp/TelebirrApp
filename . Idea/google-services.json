@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "551408497442",
+    "firebase_url": "https://telebirr-1634c-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "telebirr-1634c",
+    "storage_bucket": "telebirr-1634c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:551408497442:android:499cd272caec0d40ab2b7b",
+        "android_client_info": {
+          "package_name": "Cn.tydic.ethiopay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "551408497442-d67edmhk9q2uo0hr3l1b5mord8o7sr8g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBylAhHCr6HE8j-uGhpjWj5P7lCaVYg_1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103257599521515756606",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
