@@ -1,4 +1,10 @@
-* @actions/actions-workflow-development-reviewers
-
-/code-scanning/ @actions/advanced-security-code-scanning @actions/actions-workflow-development-reviewers
-/pages/ @actions/pages @actions/actions-workflow-development-reviewers
+*       @readthedocs/backend
+*.js    @readthedocs/frontend
+*.html  @readthedocs/frontend
+*.css   @readthedocs/frontend
+*.less  @readthedocs/frontend
+*.scss  @readthedocs/frontend
+*.svg   @readthedocs/frontend
+*.png   @readthedocs/frontend
+*.jpg   @readthedocs/frontend
+/docs/  @readthedocs/advocacy
