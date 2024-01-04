@@ -1,11 +1,11 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
-
 version: 1.0.0
 updates:
-  - package-ecosystem: "python" # See documentation for possible values
-    directory: "/data/Storage/emulated/0/Android/cn.tydic.ethiopay" # Location of package manifests
+  - package-ecosystem: github-actions
+    directory: /
     schedule:
-      interval: "daily"
+      interval: daily
+    ignore:
+      # Ignore all patch releases as we can manually
+      # upgrade if we run into a bug and need a fix.
+      - dependency-name: "*"
+        update-types: ["version-update:semver-patch"]
