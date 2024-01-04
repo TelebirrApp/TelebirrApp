@@ -1,11 +1,20 @@
-version: 1.0.0
+# Basic `dependabot.yml` file with
+# minimum configuration for two package managers
+
+version: 2
 updates:
-  - package-ecosystem: github-actions
-    directory: /
+  # Enable version updates for npm
+  - package-ecosystem: "npm"
+    # Look for `package.json` and `lock` files in the `root` directory
+    directory: "/"
+    # Check the npm registry for updates every day (weekdays)
     schedule:
-      interval: daily
-    ignore:
-      # Ignore all patch releases as we can manually
-      # upgrade if we run into a bug and need a fix.
-      - dependency-name: "*"
-        update-types: ["version-update:semver-patch"]
+      interval: "daily"
+
+  # Enable version updates for Docker
+  - package-ecosystem: "docker"
+    # Look for a `Dockerfile` in the `root` directory
+    directory: "/"
+    # Check for updates once a week
+    schedule:
+      interval: "weekly"
