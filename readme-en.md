@@ -20,7 +20,7 @@ Characteristic:
 * a framework composited all types of transaction patterns.
 * multiple pattern of transactions can be used together.
 * High performance.
-	* most business system bottlenecks are in the business database, 
+	* most business system bottlenecks are in the business database,
 	* and the framework's extra consumption to business database is a 25-byte row(if the framework's idempotent implementation is not enabled)
 * Optional idempotent implementations and calling sequence guarantee implement
 	* it will greatly reduce business development consumption
@@ -53,7 +53,7 @@ Distributed business scenario
 * TCC pattern
 	* applicable to businesses that require remote execution results to determine global-transaction status, and remote execution is unable to make compensation.
 	* the least common.
-	* the final solution encompasses all scenarios that must be implemented using 2PC. 
+	* the final solution encompasses all scenarios that must be implemented using 2PC.
 	* The maximum amount of coding and the maximum consumption of performance,it should be avoid using as far as possible.
 * SAGA pattern
 	* it's similar to compensation pattern.
@@ -61,7 +61,7 @@ Distributed business scenario
 	* SAGA executed asynchronously through the queue, thus reducing the lock time of master transaction records
 	* When a lot of synchronous calls(e.g. TCC,Compensation) are in master transacion, SAGA can be used instead of synchronous calls for performance
 	* when using saga,there's something to be pay attention(just go and see demo), because the transaction of the master will be split into two.
-	* The SAGA implemented in this framework is not a traditional SAGA. 
+	* The SAGA implemented in this framework is not a traditional SAGA.
 	* The difference between traditional SAGA and this SAGA can be analogized to the relationship between traditional compensation and TCC.
 	* And the framework uses RPC instead of queues to implement SAGA for reasons that can be seen in the SAGA-TCC DEMO
 
@@ -83,7 +83,7 @@ For distributed transactions, the framework hook the corresponding framework ope
 * when Using TCC, the framework calls Confirm or Cancel depending on the golobal-transaction status
 
 
-The framework has background threads responsible for CRASH recovery (e.g. to execute confirm or rollback in TCC) based on "write logs prior to the execution of a distributed service invocation,so that we can tell whether the remote service may have been invoked" and "a framework record submitted with the transaction to determine the global-transaction status" 
+The framework has background threads responsible for CRASH recovery (e.g. to execute confirm or rollback in TCC) based on "write logs prior to the execution of a distributed service invocation,so that we can tell whether the remote service may have been invoked" and "a framework record submitted with the transaction to determine the global-transaction status"
 
 The framework also has an  (optional) implementation of idempotency, which ensures that business methods are logically executed only once (it is possible to execute multiple times, but methods executed multiple times are rolled back, so business programs need to control their idempotency when it comes to non-rollbackable external resources)
 
@@ -136,35 +136,35 @@ the remote method can be invoked directly without considering the specific type 
 
 	@Transactional
 	public int buySomething(int userId,long money){
-		
+
 		/**
 		 * finish the local transaction first, in order for performance and generated of business id
 		 */
 		Integer id = saveOrderRecord(jdbcTemplate,userId,money);
-		
+
 		/**
 		 * annotation the global transactionId, it is combined of appId + bussiness_code + id
 		 * this line of code can be omit,then framework will use "default" as businessCode, and will generate an id
 		 * but it will make us harder to associate an global transaction to an concrete business
 		 */
 		transaction.startEasyTrans(BUSINESS_CODE, id);
-		
+
 		/**
 		 * call remote service to deduct money, it's a TCC service,
-		 * framework will maintains the eventually constancy based on the final transaction status of method buySomething 
+		 * framework will maintains the eventually constancy based on the final transaction status of method buySomething
 		 * if you think introducing object transaction(EasyTransFacade) is an unacceptable coupling
 		 * then you can refer to another demo(interfacecall) in the demos directory, it will show you how to execute transaction by user defined interface
 		 */
 		WalletPayRequestVO deductRequest = new WalletPayRequestVO();
 		deductRequest.setUserId(userId);
 		deductRequest.setPayAmount(money);
-		
+
 		/**
 		 * return future for the benefits of performance enhance(batch write execute log and batch execute RPC)
 		 */
 		Future<WalletPayResponseVO> deductFuture = transaction.execute(deductRequest);
-		
-		
+
+
 		/**
 		 * publish a message when this global-transaction is confirm
 		 * so the other services subscribe for this event can receive this message
@@ -173,16 +173,16 @@ the remote method can be invoked directly without considering the specific type 
 		orderFinishedMsg.setUserId(userId);
 		orderFinishedMsg.setOrderAmt(money);
 		transaction.execute(orderFinishedMsg);
-		
+
 		/**
 		 * you can add more types of transaction calls here, e.g. SAGA-TCC、Compensation and so on
-		 * framework will maintains the eventually consistent 
+		 * framework will maintains the eventually consistent
 		 */
-		
+
 		/**
-		 * we can get remote service result to determine whether to commit this transaction 
-		 * 
-		 * deductFuture.get(); 
+		 * we can get remote service result to determine whether to commit this transaction
+		 *
+		 * deductFuture.get();
 		 */
 		return id;
 	}
@@ -219,9 +219,9 @@ WalletPayTccMethodRequest is the request parameter, which is POJO inherited from
 	@BusinessIdentifer(appId=Constant.APPID,busCode=METHOD_NAME)
 	public class WalletPayTccMethodRequest implements TccTransRequest<WalletPayTccMethodResult>{
 		private static final long serialVersionUID = 1L;
-		
+
 		private Integer userId;
-		
+
 		private Long payAmount;
 
 		public Long getPayAmount() {
@@ -245,14 +245,14 @@ The above example is a traditional form of invocation. The business code decoupl
 
 	@Transactional
 	public String buySomething(int userId,long money){
-		
+
 		int id = saveOrderRecord(jdbcTemplate,userId,money);
-		
+
 		//WalletPayRequestVOjust need to implements Serializable
 		WalletPayRequestVO request = new WalletPayRequestVO();
 		request.setUserId(userId);
 		request.setPayAmount(money);
-		
+
 		//payService is an framework generated object of a user customed interface without any super classes
 		WalletPayResponseVO pay = payService.pay(request);
 
@@ -283,7 +283,7 @@ Each business database needs to add two tables.
 	  PRIMARY KEY (`app_id`,`bus_code`,`trx_id`),
 	  KEY `parent` (`p_app_id`,`p_bus_code`,`p_trx_id`)
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-	
+
 	CREATE TABLE `idempotent` (
 	  `src_app_id` smallint(5) unsigned NOT NULL COMMENT 'source AppID',
 	  `src_bus_code` smallint(5) unsigned NOT NULL COMMENT 'source business code',
@@ -312,7 +312,7 @@ Each business database needs to add two tables.
 	  PRIMARY KEY (`log_detail_id`),
 	  KEY `app_id` (`trans_log_id`)
 	) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-	
+
 	CREATE TABLE `trans_log_unfinished` (
 	  `trans_log_id` binary(12) NOT NULL,
 	  `create_time` datetime NOT NULL,
@@ -378,6 +378,3 @@ wechat public account of author
 if you like this framework，please STAR it,THX
 
 email: skyes.xu@qq.com
-
-
-
