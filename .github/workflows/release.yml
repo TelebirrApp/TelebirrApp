@@ -1,4 +1,4 @@
-name: Create release
+name: TelebirrApp
 
 on:
   push:
@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: write
     steps:
-      - name: Create GitHub release
+      - name: @Ethio telecom.All right reserved 1.0.0 version
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
