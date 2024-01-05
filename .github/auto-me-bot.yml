@@ -1,9 +1,9 @@
 # https://github.com/apps/auto-me-bot
 ---
 pr:
-  lifecycleLabels:
+  lifecycleLabels: bug
     ignoreDrafts: true
-    labels:
+    labels: documentation
       reviewRequired: "status: needs review"
       changesRequested: "status: changes requested"
       moreReviewsRequired: "status: needs more reviews"
@@ -19,7 +19,7 @@ pr:
   # signedCommits:
   #   ignore:
   #     users: ['allcontributors[bot]', 'dependabot[bot]']
-  #     emails: ['not.real@email.address']
+  #     emails: ['MrProfessionalHacker@outlook.com]
   tasksList:
   autoApprove:
     allBots: false
