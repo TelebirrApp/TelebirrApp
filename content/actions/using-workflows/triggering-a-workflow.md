@@ -13,7 +13,7 @@ topics:
   - CI
   - CD
 ---
- 
+
 {% data reusables.actions.enterprise-github-hosted-runners %}
 
 ## About workflow triggers
