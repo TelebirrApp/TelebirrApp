@@ -1,0 +1,180 @@
+FinanceService:
+    defaultLang: en
+    bankConfigMap:
+        - bankCode: CBE
+          fundsLenderId: 3
+        - bankCode: Dashen
+          fundsLenderId: 2
+    menuItemMap:
+        en:
+            - funcId: finance_loan
+              funcName: telebirr mela
+              funcDesc: No collateral, immediate apply and release, transaction based  Max limit can up to 10,000 (ETB)
+              icon: finance_icon_loan
+              execute: Loan
+              queryDetail: N
+              order: 1
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_saving
+              funcName: telebirr sanduq
+              funcDesc: Interest Free/High interest rate with daily gain
+              icon: finance_icon_saving
+              execute: Saving
+              queryDetail: N
+              order: 2
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_overdraft
+              funcName: telebirr endekise
+              funcDesc: Pay with credit on insufficient balance, transaction based, Max limit can up to 2,000 (ETB)
+              icon: finance_icon_od
+              execute: Overdraft
+              queryDetail: N
+              order: 3
+              supportBank:
+                  - Dashen
+        am:
+            - funcId: finance_loan
+              funcName: ቴሌብር መላ
+              funcDesc: ማስያዣ የማይጠይቅ ,ውዲያውኑ ተፈጻሚ እንዲሁም እስከ 10000 ብር ከፍተኛ ገደብ ማግኘት የሚያስችል
+              icon: finance_icon_loan
+              execute: Loan
+              queryDetail: N
+              order: 1
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_saving
+              funcName: ቴሌብር ሳንዱቅ
+              funcDesc: ከወለድ ነፃ ወይም በየቀኑ ከፍተኛ  ወለድ የሚያስገኝ
+              icon: finance_icon_saving
+              execute: Saving
+              queryDetail: N
+              order: 2
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_overdraft
+              funcName: ቴሌብር እንደኪሴ
+              funcDesc: ሂሳብዎ በቂ ባልሆነ ጊዜ እስከ 2000 ብር ከፍተኛ ገደብ ግብይቶዎን በክሬዲት  ይፈፅሙ
+              icon: finance_icon_od
+              execute: Overdraft
+              queryDetail: N
+              order: 3
+              supportBank:
+                  - Dashen
+        om:
+            - funcId: finance_loan
+              funcName: telebirr mela
+              funcDesc: Wabii hin qabu, hatattamaan gaafachuun kan gad dhiifamu, daddabarsa herregaa irratti kan hundaa'e, daangaa ol'aanaa hanga 10,000 ( Qarshii)
+              icon: finance_icon_loan
+              execute: Loan
+              queryDetail: N
+              order: 1
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_saving
+              funcName: telebirr sanduq
+              funcDesc: Kan dhala irraa bilisaa/  Kan dhalaa olaanaa bu'aa guyyaani waliin
+              icon: finance_icon_saving
+              execute: Saving
+              queryDetail: N
+              order: 2
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_overdraft
+              funcName: telebirr endekise
+              funcDesc: Hafnaan herregaa yeroo gahaa hin taane irratti kireeditiin kaffaluu, daddabarsa herregaa irratti kan hundaa'e, daangaa ol'aanaa hanga 2,000 ( Qarshii)
+              icon: finance_icon_od
+              execute: Overdraft
+              queryDetail: N
+              order: 3
+              supportBank:
+                  - Dashen
+        ti:
+            - funcId: finance_loan
+              funcName: ቴሌብር መላ
+              funcDesc: መተሓዚ ዘይጥይቅ ፣ ብቅልጡፍ ዝፍፀም ክሳብ 10000 ዝለዓለ ገደብ ክረክቡ ዘክእል
+              icon: finance_icon_loan
+              execute: Loan
+              queryDetail: N
+              order: 1
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_saving
+              funcName: ቴሌብር ሳንዱቅ
+              funcDesc: ነፃ ወለድ ወይ ከዓ መዓልታዊ  ዝለዓለ ወለድ መጠን ዘውህብ
+              icon: finance_icon_saving
+              execute: Saving
+              queryDetail: N
+              order: 2
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_overdraft
+              funcName: ቴሌብር እንደኪሴ
+              funcDesc: ሒሳቦም እኩል ኣብ ዘይኮነ ግዜ ክሳብ 2000 ብር  ብዝለዓለ ገደብ ዕድጊት ይግበሩ
+              icon: finance_icon_od
+              execute: Overdraft
+              queryDetail: N
+              order: 3
+              supportBank:
+                  - Dashen
+        so:
+            - funcId: finance_loan
+              funcName: telebirr mela
+              funcDesc: dhamaan la'aan ,isla markiiba dalbato si aad usiidaysato,macmiil ganacsi ku salaysan, xadka ugu badan wuxuu gaadhi karaa ilaa 10000 (ETB) kaydsasho
+              icon: finance_icon_loan
+              execute: Loan
+              queryDetail: N
+              order: 1
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_saving
+              funcName: telebirr sanduq
+              funcDesc: dulsaar la'aan/dulsaar sare oo leh faa'iido maalin la ah ee telebirr endikise xad-dhaaf ah
+              icon: finance_icon_saving
+              execute: Saving
+              queryDetail: N
+              order: 2
+              supportBank:
+                  - CBE
+                  - Dashen
+            - funcId: finance_overdraft
+              funcName: telebirr endekise
+              funcDesc: ku bixinta amaahda kuma filo,xawiladada ku salaysan,xadka ugu sareeyo wuxuu noqon karaa ilaa 2,000
+              icon: finance_icon_od
+              execute: Overdraft
+              queryDetail: N
+              order: 3
+              supportBank:
+                  - Dashen
+SavingProductConfig:
+    productIconMap:
+        "10001": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-Interest.png
+        "50004": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-no-Interest.png
+        "170044": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-Interest.png
+        "170002": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-Interest.png
+        "170001": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-Interest.png
+        "21024": https://superapp.ethiomobilemoney.et:38443/customer/img/finance-saving-product-Interest.png
+    bankProductMap:
+        - fundsLenderId: 2
+          productIdList:
+              - 10001
+              - 50004
+        - fundsLenderId: 3
+          productIdList:
+              - 170044
+              - 170006
+              - 170003
+              - 170002
+              - 170001
+              - 170045
+              - 21024
