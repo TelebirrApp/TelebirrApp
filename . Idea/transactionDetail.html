@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0,
+    maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' 'unsafe-eval'">
+  <link rel="icon" href="data:image/ico;base64,aWNv">
+  
+  <script src="../../../framework/view/view.js"></script>
+  <script src="../../page-frame.js"></script>
+  
+  <script>
+    var __setCssStartTime__=Date.now();
+    __maAppCode__['pages/transactionDetail/transactionDetail.mass']();
+    var __setCssEndTime__=Date.now();
+    (function(){
+      var gf=$gma('./pages/transactionDetail/transactionDetail.maml');
+      if(window.__maAppCodeReadyCallback__){
+        window.__maAppCodeReadyCallback__(gf);
+      }else{
+        var data={detail:{generateFunc:gf,path:'pages/transactionDetail/transactionDetail'}}
+        document.dispatchEvent(new CustomEvent("generateFuncReady",data));
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div></div>
+</body>
+</html>
