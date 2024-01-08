@@ -1,0 +1,80 @@
+{
+"responseCode": "SYS00000",
+"responseDesc": "Operation success.",
+"serverTimestamp": "1685867147611",
+"balance": "0.00",
+"accruedInterest": "0.00",
+"rateValue": "8%",
+"rateValueMode": "Rate",
+"currency": "ETB",
+"productId": "170002",
+"uniqueId": "300005",
+"productName": "12month Locked",
+"accountNo": "100000000000830052",
+"totalCapitalizationAmount": "0.00",
+"accountEntryItems": [
+{
+"transactionEndTime": "2023-06-04 10:23:24",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S0664100H7Q90002725323"
+},
+{
+"transactionEndTime": "2023-06-04 10:23:24",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S0664100MZGE0002725320"
+},
+{
+"transactionEndTime": "2023-06-02 00:00:33",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S0662100KKBG0002725292"
+},
+{
+"transactionEndTime": "2023-06-02 00:00:32",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S0662100TBX40002725289"
+},
+{
+"transactionEndTime": "2023-06-02 00:00:32",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S06621004SUM0002725286"
+},
+{
+"transactionEndTime": "2023-05-30 02:46:25",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S065U100KQWO0002725067"
+},
+{
+"transactionEndTime": "2023-05-29 16:30:02",
+"businessScope": "Interest Capitalization",
+"transactionAmount": "0.00",
+"balance": "0.00",
+"currency": "ETB",
+"transfer": "In",
+"orderID": "S065T100QTUW0002725043"
+}
+]
+}
