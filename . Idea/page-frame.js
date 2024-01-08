@@ -1,8 +1,8 @@
 var __mainPageFrameReady__=window.__mainPageFrameReady__||function(){};
-var __pageFrameStartTime__=__pageFrameStartTime__||Date.now(); 
+var __pageFrameStartTime__=__pageFrameStartTime__||Date.now();
 var __webviewId__=__webviewId__;
 var __layer__='view';
-var __maAppCode__=__maAppCode__||{}; 
+var __maAppCode__=__maAppCode__||{};
 var __MAML_GLOBAL__=__MAML_GLOBAL__||{entrys:{},defines:{},modules:{},sjs_init:false};
 
 
@@ -770,7 +770,7 @@ $gma=function(path,global){
         }
       }
   }
-  
+
   var $ixc = {};
   function _ic(p,ent,me,e,s,r,gg){var x=_grp(p,ent,me);ent[me].j.push(x);if(x){if($ixc[x]){_rtw('-1:include:-1:-1: `'+p+'` is being included in a loop, will be stop.');return;}$ixc[x]=true;try{ent[x].f(e,s,r,gg)}catch(e){}$ixc[x]=false;}else{_rtw(me+':include:-1:-1: Included path `'+p+'` not found from `'+me+'`.')}} // include
   function _w(tn,f,line,c){_rtw(f+':template:'+line+':'+c+': Template `'+tn+'` not found.');}
@@ -796,7 +796,7 @@ $gma=function(path,global){
   __MAML_GLOBAL__.ops_set=__MAML_GLOBAL__.ops_set||{};
   __MAML_GLOBAL__.ops_init=__MAML_GLOBAL__.ops_init||{};
   var z=__MAML_GLOBAL__.ops_set.$gma||[];
-  
+
   function gz$gma_1(){
     if(__MAML_GLOBAL__.ops_cached.$gma_1)return __MAML_GLOBAL__.ops_cached.$gma_1
     __MAML_GLOBAL__.ops_cached.$gma_1=[];
@@ -2726,7 +2726,7 @@ $gma=function(path,global){
     __MAML_GLOBAL__.ops_cached.$gma_49=[];
     (function(z){
       function Z(ops){z.push(ops)}
-      
+
     })(__MAML_GLOBAL__.ops_cached.$gma_49);
     return __MAML_GLOBAL__.ops_cached.$gma_49
   }
@@ -5177,7 +5177,7 @@ $gma=function(path,global){
   }
   __MAML_GLOBAL__.ops_set.$gma=z;
   __MAML_GLOBAL__.ops_init.$gma=true;
-  
+
   var sjs_require=function(){
     var smm={}; // sjs modules map
     var smem={}; // sjs modules exports map
@@ -5201,7 +5201,7 @@ $gma=function(path,global){
     }
   }()
 
-  
+
   d_["./components/common-button/common-button.maml"]={};
   var m0=function(e,s,r,gg){
     var z=gz$gma_1()
@@ -5589,7 +5589,7 @@ $gma=function(path,global){
   d_["./pages/redirectMain/redirectMain.maml"]={};
   var m48=function(e,s,r,gg){
     var z=gz$gma_49()
-    
+
     return r;
   };
   e_["./pages/redirectMain/redirectMain.maml"]={f:m48,j:[],i:[],ti:[],ic:[]};
@@ -6215,7 +6215,7 @@ var setCssToHead=function(file,info){
     tInfo=tInfo||info;
     css=makeup(tFile,opt);
     if(!css)return;
-    
+
     if(!style){
       var head=document.head||document.getElementsByTagName('head')[0];
       style=document.createElement('style');
