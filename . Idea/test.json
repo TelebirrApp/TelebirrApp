@@ -1,0 +1,13 @@
+{
+"responseCode": "SYS00000",
+"responseDesc": "Operation success.",
+"serverTimestamp": "1686276060948",
+"updateMode": "silence",
+"latestVersion": "1.1.0",
+"downloadUrl": "url",
+"description": "release version",
+"resourceVersion": "1.0.0",
+"newestTermsVersion": "1.0.0",
+"newestTermsUrl": "https://superapp.ethiomobilemoney.et:38443/customer/help/Terms.html",
+"confirmTermsAndConditions": "false"
+}
