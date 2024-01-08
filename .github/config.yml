@@ -1,8 +1,3 @@
-# ProBot TODO bot
-# https://probot.github.io/apps/todo/
-
-todo:
-  autoAssign: false
-  blobLines: 7
-  caseSensitive: true
-  keyword: "TODO"
+theme: jekyll-theme-minimal
+title: TelebirrApp's homepage
+description: Telebirr integration!
