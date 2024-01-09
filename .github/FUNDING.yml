@@ -1,11 +1,11 @@
 # These are supported funding model Python
 
-github: # Telebirr
-patreon: # MrProfessionalHacker@outlook.com
-open_collective: # MrProfessionalHacker@outlook.com
+github: # https://telebirrapp.github.io/TelebirrApp/
+patreon: # https://www.patreon.com/TelebirrApp
+open_collective: # https://opencollective.com/telebirrapp-inc
 tidelift: # Python
-community_bridge: #  TelebirrApp
-liberapay: # TelebirrApp
-issuehunt: # TelebirrApp
-lfx_crowdfunding: # TelebirrApp
+community_bridge: #  Telebirr
+liberapay: # Telebirr
+issuehunt: # Telebirr
+lfx_crowdfunding: # https://connect.stripe.com/app/express#settings
 custom: #['https://play.google.com/store/apps/details?id=cn.tydic.ethiopay&hl=en&gl=US', ['https://www.python.org/psf/sponsorship/']
